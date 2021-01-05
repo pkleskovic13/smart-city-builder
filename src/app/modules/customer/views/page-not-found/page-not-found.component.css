@@ -1,0 +1,19 @@
+.imageHeader {
+  padding-top: 5em;
+}
+
+.responsiveImage {
+  width: 50vw;
+  display: block;
+  margin: auto;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imageSubtext {
+  margin-top: 2em;
+  text-align: center;
+}

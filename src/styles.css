@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.loginBackgroundGradient {
+  background-image: url("assets/images/a1_pattern.jpg");
+  background-color: #f2f2f2;
+  height: 100vh;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.fab {
+  position: fixed;
+  right: 100px;
+  bottom: 50px;
+}

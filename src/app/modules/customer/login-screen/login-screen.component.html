@@ -1,0 +1,35 @@
+<div class="loginBackgroundGradient"
+     fxLayout="column"
+     fxLayoutAlign="center center">
+  <form nz-form
+        [nzLayout]="'vertical'"
+        [formGroup]="userLoginForm"
+        (ngSubmit)="onFormSubmit()">
+    <nz-card style="width:300px;"
+             nzTitle="User Login"
+             [nzActions]="[actionLogin]">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your e-mail!">
+          <nz-input-group nzPrefixIcon="mail">
+            <input formControlName="userEmail"
+                   nz-input
+                   placeholder="Email" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input formControlName="userPassword" nz-input type="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-card>
+    <ng-template #actionLogin type="submit">
+      <button nz-button nzType="primary" nzSize="large" nzShape="round"><i nz-icon nzType="login"></i></button>
+    </ng-template>
+  </form>
+  <button nz-button nzType="default" nzShape="round" style="margin-top:1em;" routerLink="">
+    back to the main page
+  </button>
+</div>

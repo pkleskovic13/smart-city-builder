@@ -1,0 +1,81 @@
+<h1>Users</h1>
+<p>
+  Here you can check out all the users that are currently using your service, add new accounts to give out
+  to your bussiness partners.
+</p>
+
+<nz-space nzDirection="vertical"
+          style="width: 100%;"
+          nzSize="large">
+
+  <nz-space-item>
+    <nz-alert nzType="info"
+              nzMessage="Future Plans"
+              nzDescription="We intend to add the support for either disabling or deleting the accounts completely!"
+              nzShowIcon>
+    </nz-alert>
+  </nz-space-item>
+  
+  <nz-space-item>
+    <form nz-form
+          [nzLayout]="'inline'"
+          [formGroup]="newUserForm"
+          (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input formControlName="newEmail"
+                   nz-input
+                   type="email"
+                   placeholder="User email" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input formControlName="newPassword"
+                   nz-input
+                   type="password"
+                   placeholder="User Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button
+                  nzType="primary">Create new account</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-table #editRowTable
+              nzBordered
+              [nzData]="users"
+              nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Display Name</th>
+          <!-- <th>Delete</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <ng-container>
+            <td>{{ user.email }}</td>
+            <td>{{ user.displayName }}</td>
+            <!-- <td><button nz-button
+                      nzType="primary"
+                      nzDanger
+                      nz-popconfirm
+                      nzTitle="Are you sure you want to delete {{user.email}}?"
+                      (nzOnConfirm)="delete(user.id)">Delete</button></td> -->
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-space-item>
+</nz-space>

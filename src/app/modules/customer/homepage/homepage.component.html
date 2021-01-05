@@ -1,0 +1,21 @@
+<div class="loginBackgroundGradient"
+     fxLayout="column"
+     fxLayoutAlign="center center">
+
+  <nz-card style="width:300px;"
+           nzTitle="Smart City Builder"
+           [nzActions]="[actionLogin]">
+    <p>
+      Welcome to the future of the Smart City planning! Our elegant and simple solution gives you all the tools you
+      need to create
+      the perfect smart city of the future!
+    </p>
+  </nz-card>
+  <ng-template #actionLogin>
+    <button routerLink="app"
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            nzShape="round"><i nz-icon nzType="environment" nzTheme="outline"></i></button>
+  </ng-template>
+</div>

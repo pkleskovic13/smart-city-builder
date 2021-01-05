@@ -1,0 +1,61 @@
+<div *ngIf="user.displayName; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <h1>Welcome, {{user.displayName}}!</h1>
+</ng-template>
+<ng-template #elseBlock>
+  <h1>Welcome, {{user.email}}!</h1>
+</ng-template>
+<h3>Below is the list of items you can manage in the database. We wish you a productive day :)</h3>
+
+<nz-space nzDirection="vertical" style="width: 100%;" nzSize="large">
+  <nz-space-item>
+    <nz-alert nzType="info"
+              nzMessage="Future Plans"
+              nzDescription="These stats are here just for showcasing what we can do. These can be customized to fit your needs."
+              nzShowIcon>
+    </nz-alert>
+  </nz-space-item>
+  <nz-space-item>
+    <nz-card [nzBordered]="false"
+             nzTitle="Products"
+             [nzExtra]="extraProductsTemplate">
+      <p>Here you can add, update or remove products.</p>
+      <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="numberOfProducts | number" [nzTitle]="'Number of Products'"></nz-statistic>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="averageProductPrice | number: '1.0-2'" [nzTitle]="'Average Product Price'"></nz-statistic>
+        </nz-col>
+      </nz-row>
+    </nz-card>
+
+    <ng-template #extraProductsTemplate>
+      <a routerLink="../products">Manage Products</a>
+    </ng-template>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card [nzBordered]="false"
+             nzTitle="Bills"
+             [nzExtra]="extraBillsTemplate">
+      <p>Here you can check out the currently created bills.</p>
+    </nz-card>
+
+    <ng-template #extraBillsTemplate>
+      <a routerLink="../bills">Manage Bills</a>
+    </ng-template>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card [nzBordered]="false"
+             nzTitle="Users"
+             [nzExtra]="extraUsersTemplate">
+      <p>Here you can add, update or remove users, or elevate their privileges.</p>
+    </nz-card>
+
+    <ng-template #extraUsersTemplate>
+      <a routerLink="../users">Manage Users</a>
+    </ng-template>
+  </nz-space-item>
+</nz-space>

@@ -1,0 +1,48 @@
+<h1>Bills</h1>
+<p>Here you can check out all the bills that your users have created.</p>
+
+<nz-space nzDirection="vertical"
+          style="width: 100%;"
+          nzSize="large">
+
+  <nz-space-item>
+    <nz-alert nzType="info"
+              nzMessage="Future Plans"
+              nzDescription="Bills should not be showing UID as the user reference, instead we want to show a human readable format as displayName or email in the future :)"
+              nzShowIcon>
+    </nz-alert>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-table nzBordered
+              [nzData]="bills"
+              nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th nzWidth="60px"></th>
+          <th>User</th>
+          <th>Date Created</th>
+          <th>Items Bought</th>
+          <th>Total Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let bill of bills">
+          <tr>
+            <td [nzExpand]="expandSet.has(bill.id)"
+                (nzExpandChange)="onExpandChange(bill.id, $event)"></td>
+            <td>{{ bill.userId }}</td>
+            <td>{{ parseDateUsingMoment(bill.date) }}</td>
+            <td>{{ bill.products.length }}</td>
+            <td>{{ bill.total }}</td>
+          </tr>
+          <tr [nzExpand]="expandSet.has(bill.id)">
+            <div *ngFor="let product of bill.products">
+              {{ product.name }} - {{ product.description }}
+            </div>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
+  </nz-space-item>
+</nz-space>

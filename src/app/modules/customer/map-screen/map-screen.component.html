@@ -1,0 +1,74 @@
+<google-map height="94vh"
+            width="100%"
+            [center]="center"
+            [zoom]="zoom"
+            [options]="options"
+            (mapClick)="addMarker($event)"
+            (mapMousemove)="move($event)"
+            (mapRightclick)="removeLastMarker()">
+  <map-marker #marker
+              *ngFor="let markerPosition of markerPositions"
+              [position]="markerPosition"
+              [options]="markerOptions"
+              (mapClick)="openInfoWindow(marker)"></map-marker>
+  <map-info-window *ngFor="let marker of currentBillMarkers">{{marker.product.description}}</map-info-window>
+</google-map>
+
+<button nz-button
+        nzType="primary"
+        nzShape="circle"
+        class="fab"
+        nzSize="large"
+        (click)="orderButtonClicked()">
+  <i nz-icon nzType="shopping-cart"></i>
+</button>
+
+<nz-modal [(nzVisible)]="modalIsVisible"
+          nzTitle="Your Order"
+          (nzOnOk)="createBill()"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="handleCancel()"
+          nzWidth="60vw">
+  <nz-alert nzType="warning"
+            nzMessage="Warning!"
+            nzDescription="Review your order carefully before confirming your order">
+  </nz-alert>
+  <nz-table nzBordered
+            [nzData]="currentBillMarkers"
+            nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Final Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let marker of currentBillMarkers">
+        <ng-container>
+          <td>{{ marker.product.name }}</td>
+          <td>{{ marker.product.price }} {{ marker.product.currency }}</td>
+          <td>{{ marker.product.discount }}%</td>
+          <td>{{ calculateItemDiscount(marker.product.price, marker.product.discount) }} {{marker.product.currency }}
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-row nzJustify="end">
+    <nz-col>
+      <nz-statistic [nzValue]="calculateTotal() | number: '1.0-2'"
+                    [nzTitle]="'Bill total'"></nz-statistic>
+    </nz-col>
+  </nz-row>
+  <ng-template #modalFooter>
+    <button nz-button
+            nzType="default"
+            (click)="handleCancel()">Cancel</button>
+    <button nz-button
+            nzType="primary"
+            (click)="createBill()"
+            [nzLoading]="isLoading">Confirm Order</button>
+  </ng-template>
+</nz-modal>
